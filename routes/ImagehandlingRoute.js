@@ -31,7 +31,9 @@ const upload = multer({ storage: storage });
 router.post("/", upload.single("icon"), async (req, res) => {
   const data = {};
   data.name = req.body.name;
-  data.icon = req.file.filename;
+  if(req.file){
+    data.icon = req.file.filename;
+  }
   try {
     const resp = await axios.post("https://admin-service-ecru.vercel.app/category", data);
     return res.json(resp.data);
