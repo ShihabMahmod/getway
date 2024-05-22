@@ -25,15 +25,15 @@ const storage = multer.diskStorage({
     cb(null, name);
   },
 });
+
 const upload = multer({ storage: storage });
 
 router.post("/", upload.single("icon"), async (req, res) => {
-  const ADMIN_URL = process.env.ADMIN_URL;
   const data = {};
   data.name = req.body.name;
   data.icon = req.file.filename;
   try {
-    const resp = await axios.post(`${ADMIN_URL}, data`);
+    const resp = await axios.post("https://admin-service-ecru.vercel.app/category", data);
     return res.json(resp.data);
   } catch (error) {
     res.status(500).send("Error fetching data");
