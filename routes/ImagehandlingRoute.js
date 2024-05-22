@@ -18,14 +18,13 @@ const app = express();
 app.use(express.static("public"));
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, join(__dirname, "../public/images"));
+    cb(null, "/tmp");
   },
   filename: function (req, file, cb) {
     const name = Date.now() + "-" + file.originalname;
     cb(null, name);
   },
 });
-
 const upload = multer({ storage: storage });
 
 router.post("/", upload.single("icon"), async (req, res) => {
