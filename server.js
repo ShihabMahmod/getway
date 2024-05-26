@@ -17,6 +17,7 @@ const USER_URL = process.env.USER_URL;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/public',express.static('public'));
 
 app.use("/admin", proxy(ADMIN_URL));
 app.use('/organizer',proxy(ORGANIZER_URL));
