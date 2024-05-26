@@ -4,6 +4,7 @@ import path from "path";
 import { Router } from "express";
 import axios from "axios";
 
+
 const router = Router();
 
 router.use(express.static("public"));
@@ -14,6 +15,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+
+use.
 
 app.use(express.static("public"));
 const storage = multer.diskStorage({
@@ -30,7 +33,7 @@ const upload = multer({ storage: storage });
 
 router.post("/", upload.single("icon"), async (req, res) => {
   const data = {};
-  data.name = req.body.name;
+  data.name = req.body && req.body.name ? req.body.name : '';
   if(req.file){
     data.icon = req.file.filename;
   }
