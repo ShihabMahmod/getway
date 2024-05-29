@@ -10,6 +10,10 @@ const PORT = process.env.PORT || 8000;
 
 app.use(Routes);
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+
 const ADMIN_URL = process.env.ADMIN_URL;
 const ORGANIZER_URL = process.env.ORGANIZER_URL;
 const USER_URL = process.env.USER_URL;
