@@ -11,6 +11,7 @@ const router = Router();
 
 router.use(express.static("public"));
 
+
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
