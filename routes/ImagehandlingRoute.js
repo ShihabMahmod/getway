@@ -4,6 +4,7 @@ import path from "path";
 import { Router } from "express";
 import axios from "axios";
 import {v2 as cloudinary} from 'cloudinary';
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 
 const router = Router();
