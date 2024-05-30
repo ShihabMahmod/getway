@@ -3,18 +3,26 @@ import multer from "multer";
 import path from "path";
 import { Router } from "express";
 import axios from "axios";
-import {v2 as cloudinary} from 'cloudinary';
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
 
 
 const router = Router();
 
 router.use(express.static("public"));
 
+
+
+
+
+
 router.post("/", upload.single("icon"), async (req, res) => {
   
   try {
    
+  // Upload an image
+
+  
+  
   let data = {};
   data.name = req.body && req.body.name ? req.body.name : '';
   if(req.file){
