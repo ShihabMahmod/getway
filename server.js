@@ -2,11 +2,16 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import proxy from "express-http-proxy";
-
+import bodyParser from "body-parser";
 import Routes from "./routes/index.js";
+
 
 const app = express();
 const PORT = process.env.PORT || 8000;
+
+const ADMIN_URL = process.env.ADMIN_URL;
+const ORGANIZER_URL = process.env.ORGANIZER_URL;
+const USER_URL = process.env.USER_URL;
 
 app.use(Routes);
 
@@ -14,20 +19,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-const ADMIN_URL = process.env.ADMIN_URL;
-const ORGANIZER_URL = process.env.ORGANIZER_URL;
-const USER_URL = process.env.USER_URL;
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use('/public',express.static('public'));
-
-app.use("/admin", proxy(ADMIN_URL));
+app.use('/admin',proxy(ADMIN_URL));
 app.use('/organizer',proxy(ORGANIZER_URL));
 app.use("/", proxy(USER_URL));
-
-
 
 app.listen(PORT, () => console.log(`Getway server is running on PORT ${PORT}`));
 
