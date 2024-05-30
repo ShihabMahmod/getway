@@ -11,18 +11,11 @@ const router = Router();
 router.use(express.static("public"));
 
 
-
-
-
-
 router.post("/", upload.single("icon"), async (req, res) => {
+
   
   try {
    
-  // Upload an image
-
-  
-  
   let data = {};
   data.name = req.body && req.body.name ? req.body.name : '';
   if(req.file){
