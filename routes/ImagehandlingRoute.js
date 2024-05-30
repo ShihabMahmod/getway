@@ -11,45 +11,10 @@ const router = Router();
 
 router.use(express.static("public"));
 
-
-
-
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'uploads', 
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif'],
-  },
-});
-
 router.post("/", upload.single("icon"), async (req, res) => {
   
   try {
-    cloudinary.config({ 
-      cloud_name: "dlg2emvsz", 
-      api_key: "448797641344156", 
-      api_secret: "De_TouHvQDd0xmGDbQyTeI0W0co"
-  });
- 
-  // Upload an image
-
-  const result = await cloudinary.uploader.upload(req.file.path,{
-      public_id: "event"
-  }).catch((error)=>{console.log(error)});
-  
-  const optimizeUrl = cloudinary.url("shoes", {
-      fetch_format: 'auto',
-      quality: 'auto'
-  });
-  
-
-  const autoCropUrl = cloudinary.url("shoes", {
-      crop: 'auto',
-      gravity: 'auto',
-      width: 500,
-      height: 500,
-  });
-  
+   
   let data = {};
   data.name = req.body && req.body.name ? req.body.name : '';
   if(req.file){
