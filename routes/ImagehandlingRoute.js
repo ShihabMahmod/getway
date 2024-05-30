@@ -10,7 +10,13 @@ const router = Router();
 
 router.use(express.static("public"));
 
-const upload = multer({ dest: 'uploads/' });
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'uploads', 
+    allowed_formats: ['jpg', 'jpeg', 'png', 'gif'],
+  },
+});
 
 router.post("/", upload.single("icon"), async (req, res) => {
 
