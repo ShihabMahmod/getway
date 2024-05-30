@@ -12,6 +12,8 @@ const router = Router();
 router.use(express.static("public"));
 
 
+
+
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
@@ -21,7 +23,6 @@ const storage = new CloudinaryStorage({
 });
 
 router.post("/", upload.single("icon"), async (req, res) => {
-
   
   try {
     cloudinary.config({ 
