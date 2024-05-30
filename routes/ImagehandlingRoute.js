@@ -5,27 +5,41 @@ import { Router } from "express";
 import axios from "axios";
 
 
-
 const router = Router();
 
 router.use(express.static("public"));
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const app = express();
+
+app.use(express.static("public"));
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "/tmp");
+  },
+  filename: function (req, file, cb) {
+    const name = Date.now() + "-" + file.originalname;
+    cb(null, name);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 router.post("/", upload.single("icon"), async (req, res) => {
-
-  
-  try {
-   
-  let data = {};
+  const data = {};
   data.name = req.body && req.body.name ? req.body.name : '';
   if(req.file){
-    data.icon = result.url;
+    data.icon = req.file.filename;
   }
-  const finalData = Object.keys(data).length > 0 ? data : {};
-    const resp = await axios.post("http://localhost:4000/category", finalData);
+  try {
+    const resp = await axios.post("https://admin-service-ecru.vercel.app/category", data);
     return res.json(resp.data);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send("Error fetching data");
   }
 });
 export default router;
