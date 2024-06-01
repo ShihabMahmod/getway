@@ -45,7 +45,6 @@ router.use(express.static("public"));
         width: 500,
         height: 500,
     });
-  
   let data = {};
   data.name = req.body && req.body.name ? req.body.name : '';
   if(req.file){
