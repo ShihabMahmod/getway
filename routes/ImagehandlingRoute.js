@@ -52,7 +52,7 @@ router.use(express.static("public"));
     data.icon = result.url;
   }
   const finalData = Object.keys(data).length > 0 ? data : {};
-    const resp = await axios.post("http://localhost:4000/category", finalData);
+    const resp = await axios.post("https://admin-service-ecru.vercel.app/category", finalData);
     return res.json(resp.data);
   } catch (error) {
     res.status(500).send(error);
